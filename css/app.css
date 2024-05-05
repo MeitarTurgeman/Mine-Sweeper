@@ -1,0 +1,48 @@
+body {
+    background-image: url('/img/background_image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+}
+
+.board-container {
+    margin: auto;
+}
+
+.restart-btn {
+    margin-top: 15px;
+    /* padding: 10px 20px; */
+    font-size: 25px;
+    cursor: pointer;
+    background-color: aqua;
+}
+
+.cell {
+    font-size: 1.5em;
+    width: 2em;
+    height: 2em;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.shown {
+    background-color: white;
+    color: black;
+}
+
+.game-over-modal {
+    margin: 15px;
+}
+
+.level-buttons {
+    margin-top: 20px;
+}
+
+.level-buttons button {
+    padding: 10px 10px;
+}
+
+.footer {
+    margin-top: 15px;
+}

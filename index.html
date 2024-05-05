@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Sweeper</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body onload="initGame()">
+    <h1>Mine Sweeper</h1>
+    <h2 class="timer">Time: 0</h2>
+    <div class="game-over-modal"></div>
+    <div class="life">Lives</div>
+
+    <table class="board-container">
+        <tbody class="board"></tbody>
+    </table>
+
+    <div class="level-buttons">
+        <button onclick="initGame('beginner')">Beginner</button>
+        <button onclick="initGame('medium')">Medium</button>
+        <button onclick="initGame('expert')">Expert</button>
+    </div>
+
+    <footer class="footer">Meitar Turgeman</footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
