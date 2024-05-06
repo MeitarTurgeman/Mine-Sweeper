@@ -45,3 +45,11 @@ body {
 .footer {
     margin-top: 15px;
 }
+
+.bonus-btn.hint {
+    /* font-size: 20px; */
+    /* padding: 10px; */
+    background-color: yellow;
+    border: none;
+    cursor: pointer;
+}

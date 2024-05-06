@@ -13,9 +13,10 @@ const LEVEL = {
     expert: { SIZE: 12, MINES: 32 }
 }
 
-var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, life: 3 }
+var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, life: 3, hints: 3, hintMode: false}
 
 var gTimerInterval
+var gHintsInterval
 
 function initGame(level = 'beginner') {
     document.querySelector('.game-over-modal').innerHTML = `<button class="restart-btn" onclick="initGame('${level}')">😃</button>`
@@ -23,6 +24,8 @@ function initGame(level = 'beginner') {
     gGame.markedCount = 0
     gGame.secsPassed = 0
     gGame.life = 3
+    gGame.hints = 3
+    gGame.hintMode = false
     gLevel = LEVEL[level]
     gBoard = createBoard()
     setMinesNegsCount(gBoard)
@@ -100,7 +103,14 @@ function cellClicked(elCell, i, j) {
             gameOver()
         }
     } else {
-        expandShown(gBoard, i, j)
+        if (cell.minesAroundCount === 1) {
+            elCell.style.color = 'blue';
+        } else if (cell.minesAroundCount === 2) {
+            elCell.style.color = 'green';
+        } else if (cell.minesAroundCount >= 3) {
+            elCell.style.color = 'red';
+        }
+        expandShown(gBoard, i, j)        
     }
 }
 
