@@ -33,3 +33,25 @@ function updateLife(life) {
 
     elLife.innerHTML = res
 }
+
+function updateHint(hint) {
+    var res = ''
+    const elHint = document.querySelector('.hintBtn')
+
+    for (var i = 0; i < hint; i++) {
+        res += HINT
+    }
+
+    elHint.innerHTML = res
+}
+
+function updateSafe(safe) {
+    var res = ''
+    const elSafe = document.querySelector('.safeBtn')
+
+    for (var i = 0; i < safe; i++) {
+        res += SAFE
+    }
+
+    elSafe.innerHTML = res
+}

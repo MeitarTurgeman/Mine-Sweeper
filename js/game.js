@@ -3,6 +3,8 @@
 const MINE = '💣'
 const FLAG = '🚩'
 const LIFE = '❤️'
+const HINT = '💡'
+const SAFE = '🟩'
 
 var gBoard = []
 var gLevel = {}
@@ -13,7 +15,7 @@ const LEVEL = {
     expert: { SIZE: 12, MINES: 32 }
 }
 
-var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, life: 3, hints: 3, hintMode: false}
+var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, life: 3, safe: 3, safe: 3, moveHistory: []}
 
 var gTimerInterval
 var gHintsInterval
@@ -24,8 +26,9 @@ function initGame(level = 'beginner') {
     gGame.markedCount = 0
     gGame.secsPassed = 0
     gGame.life = 3
-    gGame.hints = 3
-    gGame.hintMode = false
+    gGame.hint = 3
+    gGame.safe = 3
+    gGame.moveHistory = []
     gLevel = LEVEL[level]
     gBoard = createBoard()
     setMinesNegsCount(gBoard)
@@ -72,6 +75,8 @@ function renderBoard(board) {
     }
 
     updateLife(gGame.life)
+    updateSafe(gGame.safe)
+    updateHint(gGame.hint)
     var elBoard = document.querySelector('.board')
     elBoard.innerHTML = strHTML
 }
@@ -236,6 +241,32 @@ function revealMines() {
             }
         }
     }
+}
+
+function useSafe() {
+    if (gGame.safe === 0 || !gGame.isOn) return
+
+    var safeCells = []
+    for (var i = 0; i < gLevel.SIZE; i++) {
+        for (var j = 0; j < gLevel.SIZE; j++) {
+            const cell = gBoard[i][j]
+            if (!cell.isShown && !cell.isMine && !cell.isMarked) {
+                safeCells.push({ i, j })
+            }
+        }
+    }
+
+    var randomCell = safeCells[getRandomIntInclusive(0, safeCells.length - 1)]
+    var elCell = document.querySelector(`.cell[onclick="cellClicked(this, ${randomCell.i}, ${randomCell.j})"]`)
+    
+    elCell.classList.add('safe-highlight')
+
+    setTimeout(() => {
+        elCell.classList.remove('safe-highlight')
+    }, 3000)
+
+    gGame.safe--
+    updateSafe(gGame.safe)
 }
 
 function gameOver() {
